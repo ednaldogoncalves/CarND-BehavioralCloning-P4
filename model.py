@@ -45,22 +45,23 @@ def generator(data, batchSize = 32):
             y_batch = []
             details = data[i: i+int(batchSize/4)]
             for line in details:
-                #image = cv2.imread('./data/IMG/'+ line[0].split('/')[-1])
+
                 image = brightness_change(mpimg.imread('./data/IMG/'+ line[0].split('/')[-1]))
-                #image = mpimg.imread('./data/IMG/'+ line[0].split('/')[-1])
                 steering_angle = float(line[3])
+
                 #appending original image
                 X_batch.append(image)
                 y_batch.append(steering_angle)
+
                 #appending flipped image
                 X_batch.append(np.fliplr(image))
                 y_batch.append(-steering_angle)
+
                 # appending left camera image and steering angle with offset
-                #X_batch.append(cv2.imread('./data/IMG/'+ line[1].split('/')[-1]))
                 X_batch.append(brightness_change(mpimg.imread('./data/IMG/'+ line[1].split('/')[-1])))
                 y_batch.append(steering_angle+0.2)
+
                 # appending right camera image and steering angle with offset
-                #X_batch.append(cv2.imread('./data/IMG/'+ line[2].split('/')[-1]))
                 X_batch.append(brightness_change(mpimg.imread('./data/IMG/'+ line[2].split('/')[-1])))
                 y_batch.append(steering_angle-0.2)
 				
@@ -95,7 +96,6 @@ def network_model():
 
 # load the csv file
 basePath = 'C:/Users/ednaldo.goncalves/Documents/GitHub/CarND-BehavioralCloning-P4/data/'
-#basePath = 'data/'
 print('loading the data...')
 samples = loadData(basePath)
 
@@ -114,7 +114,7 @@ history_object = model.fit_generator(generator(train_samples), samples_per_epoch
 model.save('model.h5')
 
 ### print the keys contained in the history object
-#print(history_object.history.keys())
+print(history_object.history.keys())
 
 ### plot the training and validation loss for each epoch
 plt.plot(history_object.history['loss'])
