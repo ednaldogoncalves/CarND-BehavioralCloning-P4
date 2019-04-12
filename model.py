@@ -20,6 +20,7 @@ def loadData(basePath):
     lines = []
     with open(path.join(basePath,'driving_log.csv')) as f:
         content = csv.reader(f)
+        next(content)
         for line in content:
             lines.append(line)
 
@@ -96,6 +97,7 @@ def network_model():
 
 # load the csv file
 basePath = 'C:/Users/ednaldo.goncalves/Documents/GitHub/CarND-BehavioralCloning-P4/data/'
+#basePath = 'data/'
 print('loading the data...')
 samples = loadData(basePath)
 
