@@ -216,8 +216,8 @@ After several adjustments in the parameters, errors in libraries that I had to s
 ### Evaluation Video – Track 1
 <p align="center">
 From Front Camera					|			From Superior Camera (Simulator)
-:---------------------------------: | : ----------------------------------------:
+:---------------------------------: | :----------------------------------------:
 <img src="./docs/4.1.1.png"> | <img src="./docs/4.1.2.png">
-<a href="./video_FrontCam.mp4">Download video</a>|<a href="./video_SuperiorCam.mp4">Download video</a>
+<a href="./video_FrontCam.mp4">Download video</a> | <a href="./video_SuperiorCam.mp4">Download video</a>
 </p>
 
