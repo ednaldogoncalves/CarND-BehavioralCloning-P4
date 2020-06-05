@@ -2,7 +2,7 @@
 Udacity Self-Driving Car Engineer Nanodegree Program <br>[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 <br>
 <p align="center">
-<img src="./docs/imgs/01_BehavioralCloning.png">
+<img src="./docs/BCloning.png">
 </p>
 
 # Overview
@@ -28,9 +28,9 @@ My code for this project is publicly available and can be found here:<br> https:
 
 
 
-## 1	Files Submitted & Code Quality
+## Files Submitted & Code Quality
 
-### 1.1	My project includes the following files
+### My project includes the following files
 
 
 - **model.py** - containing the script to create and train the model
@@ -40,7 +40,7 @@ My code for this project is publicly available and can be found here:<br> https:
 - **videos** - videos recording of your vehicle driving autonomously around the track for at least one full lap
 
 
-### 1.2	Pre-built simulator
+### Pre-built simulator
 
 - [Linux](https://is.gd/rD5n99)
 - [Mac](https://is.gd/FXn3ew)
@@ -48,7 +48,7 @@ My code for this project is publicly available and can be found here:<br> https:
 
 If you are interested here is the source code for the simulator repository
 
-### 1.3	Dependencies
+### Dependencies
 
 This lab requires:
 
@@ -82,28 +82,28 @@ My computer setting is as follows:
 
 GeForce 740M, Intel Core i7-3537U@2.0GHz, 6G memory, Windows 7 Ultimate SP1 64-bit
 
-### 1.4	Submission includes functional code
+### Submission includes functional code
 
 Using the Udacity provided simulator and drive.py file, the car can be driven autonomously around the track by executing:
 
 python drive.py model.h5<br>
 <p align="center">
-<img src="./docs/imgs/01_BehavioralCloning.png">
+<img src="./docs/1.4.png">
 </p>
 <p align="center">
-<img src="./docs/imgs/Epoch_udc.png">
+<img src="./docs/1.4.1.png">
 </p>
 
-### 1.5	Submission code is usable and readable
+### Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-## 2	Model Architecture
+## Model Architecture
 
-### 2.1	An appropriate model architecture has been employed
+### An appropriate model architecture has been employed
 
 <p align="center">
-<img src="./docs/imgs/02_network_model.png">
+<img src="./docs/2.1.png">
 </p>
 
 My model consists of a convolution neural network with 4 convolution layers which have 3x3 filter sizes and depths vary between 32 and 256, and 3 fully connected layers. The model includes RELU layers to introduce nonlinearity (model.py code line 80)
@@ -115,37 +115,37 @@ pixel_normalized = pixel / 255
 pixel_mean_centered = pixel_normalized - 0.5<br>
 
 <p align="center">
-<img src="./docs/image.png">
+<img src="./docs/2.1.1.png">
 </p>
 
 At this point the car is slightly left-right, but is not leaving the track
 
-### 2.2	Attempts to reduce overfitting in the model
+### Attempts to reduce overfitting in the model
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 104). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.The model contains dropout layers in order to reduce overfitting (model.py code lines 81 and 84).
 
-### 2.3	Model parameter tuning
+### Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually (model.py code line 112). The batch_size and nb_epoch are set (model.py cod line 41).
 
-## 3	Training Strategy
+## Training Strategy
 
-### 3.1	Appropriate training data
+### Appropriate training data
 
 First of all I divided data into 80% training data and 20% validation data.
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road by adding 0.2 and -0.2 to the steering angle of the that particular image respectively (model.py code lines 63 and 67).
 For details about how I created the training data, see the next section.
 
-### 3.2	Creation of the Training Set & Training Process
+### Creation of the Training Set & Training Process
 
 The car seems to drive left and right, even in a straight line. To mitigate this problem would be to increase data collection and expand the training set, helping the model to generalize. You could change the brightness of the images or change them horizontally or vertically.
 The solution I will take is to turn the images horizontally as a mirror, so I'm going to reverse the steering angles, balancing the data set, teaching the car to drive clockwise as well as counterclockwise only using camera data two benefits: 1 - Have more data to use in training; 2 - Train the network to be more comprehensive.
 
-#### 3.2.1	Camera setups
+#### Camera setups
 
 The simulator has three cameras: a center, right and left camera. One example is as follows:<br>
 <p align="center">
-<img src="./docs/image.png"><img src="./docs/image.png"><img src="./docs/image.png">
+<img src="./docs/3.2.1.png">
 </p>
 
 To capture good driving behavior, I recorded two laps on track 1 using center lane driving. In the training stage, I use all three cameras as training inputs. This is because we need to handle the issue of recovering from being off-center driving. How to achieve this:
@@ -157,30 +157,30 @@ To capture good driving behavior, I recorded two laps on track 1 using center la
 The image below gives a sense for how multiple cameras are used to train a self-driving car. This image shows a bird's-eye perspective of the car. The driver is moving forward but wants to turn towards a destination on the left.
 From the perspective of the left camera, the steering angle would be less than the steering angle from the center camera. From the right camera's perspective, the steering angle would be larger than the angle from the center camera. The next section will discuss how this can be implemented in your project although there is no requirement to use the left and right camera images.<br>
 <p align="center">
-<img src="./docs/13_carnd-using-multiple-cameras.png">
+<img src="./docs/3.2.1.1.png">
 </p>
 
 The simulator captures images from three cameras mounted on the car: a center, right and left camera. That’s because of the issue of recovering from being off-center.In the simulator, you can weave all over the road and turn recording on and off to record recovery driving.I could train the model to associate the corresponding image from the right camera with an even harder left turn.I can simulate your vehicle being in different positions, somewhat further off the center line.For this project, I recording recoveries from the sides of the road back to center is effective. But it is also possible to use all three camera images to train the model. When recording, the simulator will simultaneously save an image for the left, center and right cameras.
 
-#### 3.2.2	Image Flipping
+#### Image Flipping
 
 To augment the data set, I flipped center camera images thinking that this would provide more number of samples to be trained. For example, here is an image that has then been flipped (model.py code line 58 and 59).<br>
 <p align="center">
-<img src="./docs/image.png">
+<img src="./docs/3.2.2.png">
 </p>
 
-#### 3.2.3	Brightness Changing:
+#### Brightness Changing:
 
 In order to learn a more general model, I randomly changes the image’s brightness in HSV space (model.py function brightness_changein code line 30-37)<br>
 <p align="center">
-<img src="./docs/image.png">
+<img src="./docs/3.2.3.png">
 </p>
 
-#### 3.2.4	Image Crop
+#### Image Crop
 
 In the image, the up part (sky) and bottom part (front part of the car) are not very useful for training, and on the other hand, it might lead to overfitting. So that I decided to crop out only the most useful part, and this is done in GPU for efficiency (model.py code line 79)<br>
 <p align="center">
-<img src="./docs/image.png">
+<img src="./docs/3.2.4.png">
 </p>
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 4 as evidenced by the validation loss is not getting lower anymore. I used an adam optimizer so that manually training the learning rate wasn’t necessary.
@@ -189,20 +189,20 @@ To remove redundant details I cropped image's 50 rows pixels from the top of the
 
 <p align="center">
 Cropped Center Camera Image<br>
-<img src="./docs/image.png">
+<img src="./docs/3.2.4.1.png">
 </p>
 
 <p align="center">
 Cropped Left Camera Image<br>
-<img src="./docs/image.png">
+<img src="./docs/3.2.4.2.png">
 </p>
 
 <p align="center">
 Cropped Right Camera Image<br>
-<img src="./docs/image.png">
+<img src="./docs/3.2.4.3.png">
 </p>
 
-## 4	Model Design Approach
+## Model Design Approach
 
 My first attempt was to use a convolution neural network model similar to the LeNet, however it doesn’t performs well enough, high loss in both training and validation. 
 So, I added tow dropout layers into the model and reduce the number of neurons in FC layers. Then I noticed that both the train loss and validation loss are small.
@@ -213,18 +213,18 @@ The final step was to run the simulator to see how well the car was driving arou
 I adopted the technique suggested in class to collect more data for the training. I simulated the car leaving the center of the track and going to the corner and then back to the middle track. I also driving with the car on counter-clockwise and adopted some general guidelines for data collection like: two or three laps of center lane driving; one lap of recovery driving from the sides; one lap focusing on driving smoothly around curves.
 After several adjustments in the parameters, errors in libraries that I had to solve and 25 compilations, I finally arrived at a satisfactory result. At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-### 4.1	Evaluation Video – Track 1
+### Evaluation Video – Track 1
 
 From Front Camera
 <p align="center">
 Cropped Right Camera Image<br>
-<img src="./docs/image.png">
+<img src="./docs/4.1.1.png">
 </p>
 
 From Superior Camera (Simulator)
 <p align="center">
 Cropped Right Camera Image<br>
-<img src="./docs/image.png">
+<img src="./docs/4.1.2.png">
 </p>
 
 video_FrontCam.mp4	 
