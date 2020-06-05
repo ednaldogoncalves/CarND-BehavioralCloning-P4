@@ -215,17 +215,9 @@ After several adjustments in the parameters, errors in libraries that I had to s
 
 ### Evaluation Video – Track 1
 
-From Front Camera
-<p align="center">
-Cropped Right Camera Image<br>
-<img src="./docs/4.1.1.png">
-</p>
-
-From Superior Camera (Simulator)
-<p align="center">
-Cropped Right Camera Image<br>
-<img src="./docs/4.1.2.png">
-</p>
+From Front Camera					|			From Superior Camera (Simulator)
+:---------------------------------: | : ----------------------------------------:
+<img src="./docs/4.1.1.png"> | <img src="./docs/4.1.2.png">
 
 video_FrontCam.mp4	 
 
