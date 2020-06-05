@@ -214,12 +214,10 @@ I adopted the technique suggested in class to collect more data for the training
 After several adjustments in the parameters, errors in libraries that I had to solve and 25 compilations, I finally arrived at a satisfactory result. At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 ### Evaluation Video – Track 1
-
+<p align="center">
 From Front Camera					|			From Superior Camera (Simulator)
-:---------------------------------: | :----------------------------------------:
+:---------------------------------: | : ----------------------------------------:
 <img src="./docs/4.1.1.png"> | <img src="./docs/4.1.2.png">
-
-video_FrontCam.mp4	 
-
-video_SuperiorCam.mp4
+<a href="./video_FrontCam.mp4">Download video</a>|<a href="./video_SuperiorCam.mp4">Download video</a>
+</p>
 
